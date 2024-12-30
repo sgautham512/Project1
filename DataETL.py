@@ -90,6 +90,12 @@ def ExtractData(file_path):
     logger.info(f"list of xml files {all_xml_files}")
     xml_data_frame = ExtractDataFromXML(all_xml_files)
     main_data_frame = pd.concat([main_data_frame, xml_data_frame], ignore_index=True)
+
+     # remove the duplicate entries if there exists something
+    main_data_frame = main_data_frame.drop_duplicates()
+    main_data_frame = main_data_frame.reset_index(drop=True)
+    logger.info(f"Duplicate entries are removed")
+ 
  
   except Exception as e:
     logging.info(f"Error occurred: {e}")
